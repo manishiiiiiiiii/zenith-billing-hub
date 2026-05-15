@@ -10,15 +10,29 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TemplatesRouteImport } from './routes/templates'
+import { Route as TaxRouteImport } from './routes/tax'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as HistoryRouteImport } from './routes/history'
 import { Route as DraftsRouteImport } from './routes/drafts'
 import { Route as CreateRouteImport } from './routes/create'
 import { Route as ClientsRouteImport } from './routes/clients'
+import { Route as BrandingRouteImport } from './routes/branding'
+import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as IndexRouteImport } from './routes/index'
 
 const TemplatesRoute = TemplatesRouteImport.update({
   id: '/templates',
   path: '/templates',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TaxRoute = TaxRouteImport.update({
+  id: '/tax',
+  path: '/tax',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HistoryRoute = HistoryRouteImport.update({
@@ -41,6 +55,16 @@ const ClientsRoute = ClientsRouteImport.update({
   path: '/clients',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BrandingRoute = BrandingRouteImport.update({
+  id: '/branding',
+  path: '/branding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnalyticsRoute = AnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -49,56 +73,90 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/analytics': typeof AnalyticsRoute
+  '/branding': typeof BrandingRoute
   '/clients': typeof ClientsRoute
   '/create': typeof CreateRoute
   '/drafts': typeof DraftsRoute
   '/history': typeof HistoryRoute
+  '/settings': typeof SettingsRoute
+  '/tax': typeof TaxRoute
   '/templates': typeof TemplatesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/analytics': typeof AnalyticsRoute
+  '/branding': typeof BrandingRoute
   '/clients': typeof ClientsRoute
   '/create': typeof CreateRoute
   '/drafts': typeof DraftsRoute
   '/history': typeof HistoryRoute
+  '/settings': typeof SettingsRoute
+  '/tax': typeof TaxRoute
   '/templates': typeof TemplatesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/analytics': typeof AnalyticsRoute
+  '/branding': typeof BrandingRoute
   '/clients': typeof ClientsRoute
   '/create': typeof CreateRoute
   '/drafts': typeof DraftsRoute
   '/history': typeof HistoryRoute
+  '/settings': typeof SettingsRoute
+  '/tax': typeof TaxRoute
   '/templates': typeof TemplatesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/analytics'
+    | '/branding'
     | '/clients'
     | '/create'
     | '/drafts'
     | '/history'
+    | '/settings'
+    | '/tax'
     | '/templates'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/clients' | '/create' | '/drafts' | '/history' | '/templates'
+  to:
+    | '/'
+    | '/analytics'
+    | '/branding'
+    | '/clients'
+    | '/create'
+    | '/drafts'
+    | '/history'
+    | '/settings'
+    | '/tax'
+    | '/templates'
   id:
     | '__root__'
     | '/'
+    | '/analytics'
+    | '/branding'
     | '/clients'
     | '/create'
     | '/drafts'
     | '/history'
+    | '/settings'
+    | '/tax'
     | '/templates'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AnalyticsRoute: typeof AnalyticsRoute
+  BrandingRoute: typeof BrandingRoute
   ClientsRoute: typeof ClientsRoute
   CreateRoute: typeof CreateRoute
   DraftsRoute: typeof DraftsRoute
   HistoryRoute: typeof HistoryRoute
+  SettingsRoute: typeof SettingsRoute
+  TaxRoute: typeof TaxRoute
   TemplatesRoute: typeof TemplatesRoute
 }
 
@@ -109,6 +167,20 @@ declare module '@tanstack/react-router' {
       path: '/templates'
       fullPath: '/templates'
       preLoaderRoute: typeof TemplatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tax': {
+      id: '/tax'
+      path: '/tax'
+      fullPath: '/tax'
+      preLoaderRoute: typeof TaxRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/history': {
@@ -139,6 +211,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ClientsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/branding': {
+      id: '/branding'
+      path: '/branding'
+      fullPath: '/branding'
+      preLoaderRoute: typeof BrandingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/analytics': {
+      id: '/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof AnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -151,10 +237,14 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AnalyticsRoute: AnalyticsRoute,
+  BrandingRoute: BrandingRoute,
   ClientsRoute: ClientsRoute,
   CreateRoute: CreateRoute,
   DraftsRoute: DraftsRoute,
   HistoryRoute: HistoryRoute,
+  SettingsRoute: SettingsRoute,
+  TaxRoute: TaxRoute,
   TemplatesRoute: TemplatesRoute,
 }
 export const routeTree = rootRouteImport
