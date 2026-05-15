@@ -1,9 +1,8 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
-  Outlet, Link, createRootRouteWithContext, useRouter, HeadContent, Scripts,
+  Outlet, Link, createRootRouteWithContext,
 } from "@tanstack/react-router";
 
-import appCss from "../styles.css?url";
 import { ThemeProvider } from "@/lib/theme";
 import { StoreProvider } from "@/lib/store";
 import { SidebarProvider } from "@/components/ui/sidebar";
@@ -27,50 +26,22 @@ function NotFoundComponent() {
 
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
-  const router = useRouter();
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-xl font-semibold">Something went wrong</h1>
         <p className="mt-2 text-sm text-muted-foreground">{error.message}</p>
-        <button onClick={() => { router.invalidate(); reset(); }} className="mt-6 rounded-xl gradient-primary px-4 py-2 text-sm font-medium text-primary-foreground">Try again</button>
+        <button onClick={() => { reset(); }} className="mt-6 rounded-xl gradient-primary px-4 py-2 text-sm font-medium text-primary-foreground">Try again</button>
       </div>
     </div>
   );
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Invoicely — Premium Invoice Generator" },
-      { name: "description", content: "Beautiful, fast invoice generator with templates, branding, analytics, and live preview." },
-      { property: "og:title", content: "Invoicely — Premium Invoice Generator" },
-      { name: "twitter:title", content: "Invoicely — Premium Invoice Generator" },
-      { property: "og:description", content: "Beautiful, fast invoice generator with templates, branding, analytics, and live preview." },
-      { name: "twitter:description", content: "Beautiful, fast invoice generator with templates, branding, analytics, and live preview." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/ac473835-3b5b-4b50-b947-e012334c678d" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/ac473835-3b5b-4b50-b947-e012334c678d" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:type", content: "website" },
-    ],
-    links: [{ rel: "stylesheet", href: appCss }],
-  }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
-
-function RootShell({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head><HeadContent /></head>
-      <body>{children}<Scripts /></body>
-    </html>
-  );
-}
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
