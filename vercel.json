@@ -1,0 +1,22 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "ignoreCommand": "[ ! -d .git ] || git diff --quiet HEAD~1 HEAD --",
+  "env": {
+    "NODE_VERSION": "20.x"
+  },
+  "regions": ["sfo1"],
+  "functions": {
+    "api/**/*.ts": {
+      "runtime": "nodejs20.x"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/:path((?!_next/static/|_next/image/|favicon.ico).*)",
+      "destination": "/"
+    }
+  ]
+}
