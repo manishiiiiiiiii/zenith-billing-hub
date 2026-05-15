@@ -12,7 +12,7 @@ import {
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
-import { StatusBadge } from "./index";
+import { StatusBadge } from "@/components/status-badge";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/history")({ component: History });

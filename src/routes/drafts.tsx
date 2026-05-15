@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { FileClock, Pencil } from "lucide-react";
-import { StatusBadge } from "./index";
+import { StatusBadge } from "@/components/status-badge";
 
 export const Route = createFileRoute("/drafts")({ component: Drafts });
 
